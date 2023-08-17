@@ -10,9 +10,9 @@ public class Bag extends Container {
 	
 	/* Constructor */
 	
-	public Bag(int height, int weight, int maxWeightSopportedBag, String reference, int width, int longBag) {
+	public Bag(String reference, int height, int weight, int width, int longBag) {
 		
-		super(height, weight, maxWeightSopportedBag, reference);
+		super(reference, weight, height);
 		this.width = width;
 		this.longBag = longBag;
 		

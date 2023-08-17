@@ -42,8 +42,32 @@ public class Order implements IOrder {
 
 	@Override
 	public IContainer addProduct(IProduct product) {
-		// TODO Auto-generated method stub
+		// Recorro los contenedores
+		for (IContainer container : containers) {
+			// Compruebo si el contenedor en el que estamos admite o no el producto que se desea añadir
+			if (container.put(product)) { // Si retorna true
+				// Retornamos el contenedor
+				return container;
+			}
+			
+		}
+		// Si no encontramos ningun contenedor en el que añadir el producto retornamos null
 		return null;
+	}
+	
+	@Override
+	public String toString() {
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("Pedido: " + reference + "\n");
+		
+		for (IContainer container : containers) {
+			sb.append("\t" + container + "\n");
+		}
+	
+		return sb.toString();
+		
 	}
 
 }

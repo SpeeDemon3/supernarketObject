@@ -1,4 +1,5 @@
 package sooper.containers;
+import java.util.HashSet;
 import java.util.Set;
 
 import sooper.IContainer;
@@ -12,26 +13,18 @@ public abstract class Container implements IContainer {
 	private Set<IProduct> products; /* Coleccion de productos */ 
 	private int height; /* Alto del contenedor */
 	private int weight;/* Peso del contenedor */
-	private int maxWeightSopportedBox = 15; /* Peso maximo soportado por el contenedor 'caja' */
-	private int maxWeightSopportedBag = 5;/* Peso maximo soportado por el contenedor 'bolsa' */		
+
 	
 
 	/* Constructores */ 
 	
-	public Container(String reference, int height, int weight, int maxWeightSopportedBox) {
+	public Container(String reference, int height, int weight) {
 
 		this.reference = reference;
 		this.height = height;
 		this.weight = weight;
-		this.maxWeightSopportedBox = maxWeightSopportedBox;
-	}
-	
-	public Container(int height, int weight, int maxWeightSopportedBag, String reference) {
-
-		this.height = height;
-		this.weight = weight;
-		this.maxWeightSopportedBag = maxWeightSopportedBag;
-		this.reference = reference;
+		products = new HashSet<>();
+		
 	}
 	
 	
@@ -71,12 +64,9 @@ public abstract class Container implements IContainer {
 
 	@Override
 	public int getResistance() {
+
 		
-		if(this.weight <= 3) {
-			return maxWeightSopportedBag;
-		}
-		
-		return maxWeightSopportedBox;
+		return 0;
 	}
 
 	@Override
@@ -84,16 +74,30 @@ public abstract class Container implements IContainer {
 		return products;
 	}
 
-//	@Override
-//	public String getType() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-
 	@Override
 	public boolean put(IProduct product) {
-		// TODO Auto-generated method stub
-		return false;
+		// Compruebo si el contenedor resiste el producto
+		boolean resitanceOk = resist(product); 
+		// Compruebo si el producto tiene espacio en este contenedor
+		boolean volumeOk = product.haveSpace();
+		
+		boolean compatibilityOk = true;
+		for (IProduct p : products) {
+			boolean compatibleOk = product.itsCompatibleWith(p);
+			compatibilityOk &= compatibleOk; 
+		}
+		
+		
+		// Compruebo la compatibilidad
+		boolean accept = resitanceOk && volumeOk && compatibilityOk;
+		
+		// Si lo acepta
+		if (accept) {
+			products.add(product); // Añado el producto
+			product.put(this); // Informo al producto que a sido metido en este contenedor
+		}
+		
+		return accept;
 	}
 
 	@Override
@@ -107,6 +111,26 @@ public abstract class Container implements IContainer {
 		return false;
 	}
 
+	@Override
+	public String toString() {
+		
+		StringBuilder sb = new StringBuilder("Contenedor: " + reference + " ["
+				 + getType()
+				 + "] (sup " + getSurface() + "cm2 - vol " + getVolume()
+				 + "cm3 - resistencia " + getResistance() + "g).\n");
+		
+		if (products.isEmpty()) { // Si esta vacio
+			sb.append("\t\tvacío\n");
+		}
+		
+		for (IProduct p : products) {
+			sb.append("\t\t" + p + "\n");
+		}
+		
+		sb.append("\t\t>> Disponible vol " + availableVolume() + "cm3");
+		
+		return sb.toString();
+	}
 	
 	
 }
