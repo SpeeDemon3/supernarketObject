@@ -15,8 +15,8 @@ public class Supermarket {
 		IOrder myOrder = new Order("test order"); 
 		
 		// Creo 2 contenedores
-		IContainer box = new Box("AAA", 10, 20, 25, 50);
-		IContainer bag = new Bag("BBB", 5, 2, 20, 40);
+		IContainer box = new Box("AAA", 10, 20, 1000, 25, 50);
+		IContainer bag = new Bag("BBB", 5, 2, 100, 20, 40);
 
 		// Añado al pedido los 2 contenedores
 		myOrder.addContainer(box);

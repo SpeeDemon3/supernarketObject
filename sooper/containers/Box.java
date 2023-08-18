@@ -1,5 +1,6 @@
 package sooper.containers;
 
+import sooper.IProduct;
 import sooper.enums.ContainerType;
 
 public class Box extends Container {
@@ -9,9 +10,9 @@ public class Box extends Container {
 	private int longBox; /* Largo  de la caja */
 	
 	/* Constructor */
-	public Box (String reference, int height, int weight, int width, int longBox) {
+	public Box (String reference, int height, int weight, int resistance, int width, int longBox) {
 		
-		super(reference, height, weight);
+		super(reference, height, weight, resistance);
 		this.width = width;
 		this.longBox = longBox;
 		
@@ -46,5 +47,12 @@ public class Box extends Container {
 	public int getSurface() {
 		return width * longBox;
 	}
+	
+	@Override
+	public boolean resist(IProduct product) {
+		return true;
+	}
+	
+	
 
 }

@@ -10,9 +10,9 @@ public class Bag extends Container {
 	
 	/* Constructor */
 	
-	public Bag(String reference, int height, int weight, int width, int longBag) {
+	public Bag(String reference, int height, int weight, int resistance, int width, int longBag) {
 		
-		super(reference, weight, height);
+		super(reference, weight, height, resistance);
 		this.width = width;
 		this.longBag = longBag;
 		
@@ -53,5 +53,6 @@ public class Bag extends Container {
 		
 		return (int) (Math.PI * radius * radius);
 	}
+
 
 }

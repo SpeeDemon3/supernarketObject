@@ -13,16 +13,18 @@ public abstract class Container implements IContainer {
 	private Set<IProduct> products; /* Coleccion de productos */ 
 	private int height; /* Alto del contenedor */
 	private int weight;/* Peso del contenedor */
+	private int resistance; /* Resistencia que tiene el contenedor */
 
 	
 
 	/* Constructores */ 
 	
-	public Container(String reference, int height, int weight) {
+	public Container(String reference, int height, int weight, int resistance) {
 
 		this.reference = reference;
 		this.height = height;
 		this.weight = weight;
+		this.resistance = resistance;
 		products = new HashSet<>();
 		
 	}
@@ -57,16 +59,21 @@ public abstract class Container implements IContainer {
 	}
 
 	@Override
-	public int availableVolume() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int availableVolume() {	
+		return getVolume() - busyVolume();
 	}
 
+	private int busyVolume() {
+		int result = 0;
+		for (IProduct p : products) {
+			result += p.getVolume();
+		}
+		return result;
+	}
+	
 	@Override
-	public int getResistance() {
-
-		
-		return 0;
+	public int getResistance() {		
+		return resistance;
 	}
 
 	@Override
@@ -79,7 +86,7 @@ public abstract class Container implements IContainer {
 		// Compruebo si el contenedor resiste el producto
 		boolean resitanceOk = resist(product); 
 		// Compruebo si el producto tiene espacio en este contenedor
-		boolean volumeOk = product.haveSpace();
+		boolean volumeOk = product.haveSpace(this);
 		
 		boolean compatibilityOk = true;
 		for (IProduct p : products) {
@@ -102,13 +109,7 @@ public abstract class Container implements IContainer {
 
 	@Override
 	public boolean resist(IProduct product) {
-		// TODO Auto-generated method stub
-		
-		/* Podria hacer un condicional comprobando el
-		 * peso del producto y saber si puede ser aguantado 
-		 * por ese contenedor en concreto
-		 */
-		return false;
+		return resistance > product.getWeight();
 	}
 
 	@Override

@@ -9,6 +9,7 @@ public abstract class Product implements IProduct {
 	private String reference; /* Referencia */
 	private int weight; /* Peso */
 	private int volume; /* Volumen */
+	private IContainer container;
 
 	// Constructor
 	public Product(String reference, int weight, int volume) {
@@ -36,15 +37,13 @@ public abstract class Product implements IProduct {
 	}
 
 	@Override
-	public boolean haveSpace() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean haveSpace(IContainer container) {
+		return container.availableVolume() > volume;
 	}
 
 	@Override
 	public void put(IContainer container) {
-		// TODO Auto-generated method stub
-		
+		this.container = container;
 	}
 	
 	@Override

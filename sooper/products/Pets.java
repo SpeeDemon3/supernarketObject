@@ -16,8 +16,7 @@ public class Pets extends Product {
 
 	@Override
 	public boolean itsCompatibleWith(IProduct p) {
-		// TODO Auto-generated method stub
-		return false;
+		return Category.DROGUERIA.equals(p.getCategory());
 	}
 
 }
