@@ -37,6 +37,10 @@ public class Bag extends Container {
 		this.longBag = longBag;
 	}
 	
+	/**
+	 * Calcula y devuelve el diámetro del círculo formado por el contenedor.
+	 * @return Diámetro del círculo del contenedor.
+	 */
 	private int getDiameter() {
 		return (int) ((2 * width) / Math.PI);
 	}
@@ -47,6 +51,10 @@ public class Bag extends Container {
 	}
 	
 	@Override
+	/**
+	 * Calcula y devuelve la superficie del círculo formado por el contenedor.
+	 * @return Superficie del círculo del contenedor.
+	 */
 	public int getSurface() {
 
 		int radius = getDiameter() / 2;

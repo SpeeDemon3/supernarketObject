@@ -38,6 +38,8 @@ public abstract class Product implements IProduct {
 
 	@Override
 	public boolean haveSpace(IContainer container) {
+	    // Compruebo si el contenedor pasado como parámetro tiene más volumen disponible
+	    // que el volumen del producto
 		return container.availableVolume() > volume;
 	}
 

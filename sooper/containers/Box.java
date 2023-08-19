@@ -40,11 +40,13 @@ public class Box extends Container {
 	
 	@Override
 	public ContainerType getType() {
+	    // Devuelve el tipo de contenedor como "BOX"
 		return ContainerType.BOX;
 	}
 
 	@Override
 	public int getSurface() {
+	    // Calcula y devuelve el area superficial del contenedor multiplicando su ancho por su largo
 		return width * longBox;
 	}
 	

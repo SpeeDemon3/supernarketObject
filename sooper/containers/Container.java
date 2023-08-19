@@ -60,14 +60,19 @@ public abstract class Container implements IContainer {
 
 	@Override
 	public int availableVolume() {	
+	    // Calcula y devuelve el volumen disponible en el contenedor restando el volumen ocupado
+	    // al volumen total del contenedor (obtenido mediante el metodo getVolume())
 		return getVolume() - busyVolume();
 	}
 
 	private int busyVolume() {
+	    // Inicializa la variable para almacenar el volumen ocupado
 		int result = 0;
+	    // Itera a través de los productos en el contenedor
 		for (IProduct p : products) {
 			result += p.getVolume();
 		}
+	    // Devuelve el volumen total ocupado por los productos
 		return result;
 	}
 	
@@ -89,6 +94,7 @@ public abstract class Container implements IContainer {
 		boolean volumeOk = product.haveSpace(this);
 		
 		boolean compatibilityOk = true;
+        // Compruebo si el producto es compatible con el producto actual en el contenedor
 		for (IProduct p : products) {
 			boolean compatibleOk = product.itsCompatibleWith(p);
 			compatibilityOk &= compatibleOk; 
@@ -109,6 +115,10 @@ public abstract class Container implements IContainer {
 
 	@Override
 	public boolean resist(IProduct product) {
+	    // Compara la resistencia del contenedor con el peso del producto.
+	    // Si la resistencia del contenedor es mayor que el peso del producto,
+	    // devuelve true, lo que indica que el contenedor puede resistir el producto.
+	    // De lo contrario, devuelve false.
 		return resistance > product.getWeight();
 	}
 

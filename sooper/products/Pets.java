@@ -11,12 +11,15 @@ public class Pets extends Product {
 
 	@Override
 	public Category getCategory() {
+	    // Devuelve la categoría del producto como "MASCOTAS"
 		return Category.MASCOTAS;
 	}
 
 	@Override
 	public boolean itsCompatibleWith(IProduct p) {
-		return Category.DROGUERIA.equals(p.getCategory());
+	    // Verifica si el producto pasado como parámetro no tiene la categoría "DROGUERIA"
+	    // para determinar si es compatible con el producto actual
+		return !Category.DROGUERIA.equals(p.getCategory());
 	}
 
 }
