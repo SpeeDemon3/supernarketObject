@@ -26,8 +26,22 @@ public class Order implements IOrder {
 
 	@Override
 	public Set<IProduct> getProducts() {
-		// TODO Auto-generated method stub
-		return null;
+		// Creo un conjunto para almacenar los productos
+		Set<IProduct> products = null;
+		// Iterar todos los contenedores
+		for (IContainer c : containers) {
+			// Si no se ha inicializado el conjunto de productos
+			if (products == null) {
+				// Obtengo los productos del contenedor actual
+				products = c.getProducts();
+			} else {
+				// Agregar los productos del contenedor actual al conjunto existente
+				products.addAll(c.getProducts());
+			}
+			
+		}
+		// Devolver el conjunto de productos
+		return products;
 	}
 
 	@Override
@@ -69,5 +83,7 @@ public class Order implements IOrder {
 		return sb.toString();
 		
 	}
+	
+	
 
 }

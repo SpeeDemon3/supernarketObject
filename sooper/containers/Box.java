@@ -10,9 +10,9 @@ public class Box extends Container {
 	private int longBox; /* Largo  de la caja */
 	
 	/* Constructor */
-	public Box (String reference, int height, int weight, int resistance, int width, int longBox) {
+	public Box (String reference, int height, int weight, int width, int longBox) {
 		
-		super(reference, height, weight, resistance);
+		super(reference, height, weight, 0);
 		this.width = width;
 		this.longBox = longBox;
 		
